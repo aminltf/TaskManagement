@@ -36,20 +36,6 @@ public static class JwtConfigurationExtensions
         })
         .AddJwtBearer(options =>
         {
-            // Read Token from Cookie (for SPA/SSR or mobile scenarios)
-            options.Events = new JwtBearerEvents
-            {
-                OnMessageReceived = context =>
-                {
-                    var token = context.HttpContext.Request.Cookies["AuthToken"];
-                    if (!string.IsNullOrWhiteSpace(token))
-                    {
-                        context.Token = token;
-                    }
-                    return Task.CompletedTask;
-                }
-            };
-
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
